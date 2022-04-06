@@ -1,7 +1,7 @@
 import React from "react";
 
 type CustomFormFieldProps = {
-    handleChange?: () => void,
+    handleChange?: (value: any) => void,
     label?: string;
     type?: string;
     name?: string;
