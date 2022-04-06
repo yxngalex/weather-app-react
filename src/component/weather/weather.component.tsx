@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./weather.styles.scss";
+import WeatherForm from "../weather-form/weather-form.component";
 
 const Weather = () => {
     const [weather, setWeather] = useState([]);
@@ -18,7 +19,7 @@ const Weather = () => {
     //
     return (
         <div>
-            <h1>Weather component works!!</h1>
+            <WeatherForm />
         </div>
     )
 
