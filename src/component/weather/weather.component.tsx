@@ -9,7 +9,7 @@ const Weather = () => {
     const [weather, setWeather] = useState(null);
 
     const addWeather = (country: Country, city: City) => {
-        getAllWeatherByCityAndCountry(city, country.countryCode).then(data => {
+        getAllWeatherByCityAndCountry(city.cityName, country.countryCode).then(data => {
             console.log(data);
             setWeather(data);
         });

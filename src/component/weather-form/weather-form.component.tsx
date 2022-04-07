@@ -5,6 +5,7 @@ import {getAllCountries} from "../../services/country.service";
 import {Country} from "../../model/country.model";
 import CustomFormField from "../form-field/form-field.component";
 import {City} from "../../model/city.model";
+import {getCityAutocomplete} from "../../services/city.service";
 
 type WeatherFormProps = {
     addWeather: (country: Country, city: City) => void;
@@ -32,6 +33,15 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
 
     const handleCityChange = (event: any) => {
         setCity({cityName: event.target.value});
+        changeCityList(event.target.value);
+    }
+
+    const changeCityList = (value: string) => {
+        if (country.countryCode && value) {
+            getCityAutocomplete(country, value).then(r => {
+                console.log(r);
+            });
+        }
     }
 
     const handleClick = () => {

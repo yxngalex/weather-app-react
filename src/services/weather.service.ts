@@ -1,6 +1,6 @@
 import axios from "axios";
 import {City} from "../model/city.model";
 
-export const getAllWeatherByCityAndCountry = async (city: City, country: string) => {
-    return (await axios.post(`http://localhost:8080/weather/forecast/${country}`,  city)).data;
+export const getAllWeatherByCityAndCountry = async (city: string, country: string) => {
+    return (await axios.get(`http://localhost:8080/weather/forecast/country/${country}/city/${city}`)).data;
 }
