@@ -13,7 +13,7 @@ type WeatherFormProps = {
 const WeatherForm = ({addWeather}: WeatherFormProps) => {
     const [countries, setCountries] = useState([]);
     const [city, setCity] = useState({cityName: ""});
-    let country: Country;
+    const [country, setCountry] = useState({countryCode: ""});
 
     useEffect(() => {
         let mounted = true;
@@ -27,7 +27,7 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
     }, []);
 
     const handleCountryChange = (event: any) => {
-        country = event.target.value;
+        setCountry({countryCode: event.target.value});
     }
 
     const handleCityChange = (event: any) => {
@@ -35,7 +35,7 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
     }
 
     const handleClick = () => {
-        if (country && city) {
+        if (country.countryCode && city.cityName) {
             addWeather(country, city);
         }
     }
