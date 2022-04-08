@@ -6,6 +6,7 @@ import {Country} from "../../model/country.model";
 import CustomFormField from "../form-field/form-field.component";
 import {City} from "../../model/city.model";
 import {getCityAutocomplete} from "../../services/city.service";
+import cloudy from "../../assets/icons/cloudy.png";
 
 type WeatherFormProps = {
     addWeather: (country: Country, city: City) => void;
@@ -61,6 +62,7 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
 
     return (
         <div className="mt-14 sm:mx-auto sm:w-full sm:max-w-md flex bg-white py-8 shadow rounded-lg sm:px-10">
+                <img src={cloudy} alt="cloudy" className="w-11 h-9 mr-5"/>
             <CustomSelect
                 handleChange={handleCountryChange}
             >

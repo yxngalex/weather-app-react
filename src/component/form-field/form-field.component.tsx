@@ -17,6 +17,7 @@ const CustomFormField = ({handleChange, type, name, id, placeholder, suggestions
     const handleSuggestion = (text: string) => {
         if (onSuggestHandler) {
             onSuggestHandler(text);
+            suggestions = [];
         }
     }
 
