@@ -2,20 +2,18 @@ import React, {useEffect, useState} from "react";
 import "./weather-form.styles.scss";
 import CustomSelect from "../custom-select/custom-select.component";
 import {getAllCountries} from "../../services/country.service";
-import {Country} from "../../model/country.model";
 import CustomFormField from "../form-field/form-field.component";
-import {City} from "../../model/city.model";
 import {getCityAutocomplete} from "../../services/city.service";
 import cloudy from "../../assets/icons/cloudy.png";
 
 type WeatherFormProps = {
-    addWeather: (country: Country, city: City) => void;
+    addWeather: (country: string, city: string) => void;
 }
 
 const WeatherForm = ({addWeather}: WeatherFormProps) => {
     const [countries, setCountries] = useState([]);
-    const [city, setCity] = useState({cityName: ""});
-    const [country, setCountry] = useState({countryCode: ""});
+    const [city, setCity] = useState("");
+    const [country, setCountry] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
     useEffect(() => {
@@ -29,21 +27,17 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
         });
     }, []);
 
-    useEffect(() => {
-
-    })
-
     const handleCountryChange = (event: any) => {
-        setCountry({countryCode: event.target.value});
+        setCountry(event.target.value);
     }
 
     const handleCityChange = (event: any) => {
-        setCity({cityName: event.target.value});
+        setCity(event.target.value);
         changeCityList(event.target.value);
     }
 
     const changeCityList = (value: string) => {
-        if (country.countryCode && value) {
+        if (country && value) {
             getCityAutocomplete(country, value).then(r => {
                 setSuggestions(r);
             });
@@ -51,18 +45,18 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
     }
 
     const handleClick = () => {
-        if (country.countryCode && city.cityName) {
+        if (country && city) {
             addWeather(country, city);
         }
     }
 
     const onSuggestionHandler = (text: string) => {
-        setCity({cityName: text});
+        setCity(text);
     }
 
     return (
         <div className="mt-14 sm:mx-auto sm:w-full sm:max-w-md flex bg-white py-8 shadow rounded-lg sm:px-10">
-                <img src={cloudy} alt="cloudy" className="w-11 h-9 mr-5"/>
+            <img src={cloudy} alt="cloudy" className="w-11 h-9 mr-5"/>
             <CustomSelect
                 handleChange={handleCountryChange}
             >
@@ -76,7 +70,7 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
                 handleChange={handleCityChange}
                 suggestions={suggestions}
                 onSuggestHandler={onSuggestionHandler}
-                value={city.cityName}
+                value={city}
             />
             <button className="ml-5" onClick={handleClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
