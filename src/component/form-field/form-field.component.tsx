@@ -7,10 +7,21 @@ type CustomFormFieldProps = {
     name?: string;
     id: string;
     placeholder?: string;
+    suggestions?: string[];
+    onSuggestHandler?: (text: string) => void;
+    value?: string;
 }
 
-const CustomFormField = ({handleChange, type, name, id, placeholder}: CustomFormFieldProps) => (
-        <div >
+const CustomFormField = ({handleChange, type, name, id, placeholder, suggestions, onSuggestHandler, value}: CustomFormFieldProps) => {
+
+    const handleSuggestion = (text: string) => {
+        if (onSuggestHandler) {
+            onSuggestHandler(text);
+        }
+    }
+
+    return (
+        <div className="relative">
             <input
                 className="w-full border border-gray-300 px-3 py-2 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 type={type}
@@ -18,7 +29,19 @@ const CustomFormField = ({handleChange, type, name, id, placeholder}: CustomForm
                 placeholder={placeholder}
                 onChange={handleChange}
                 id={id}
+                value={value}
             />
-    </div>
-)
+            <div className="absolute w-full">
+                {suggestions && suggestions.map((suggestion, i) =>
+                    <div key={i}
+                         className="justify-center block cursor-pointer border-r bg-white border-b border-l hover:bg-indigo-300 hover:text-white"
+                         onClick={() => handleSuggestion(suggestion)}
+                    >
+                        {suggestion}
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
 export default CustomFormField;

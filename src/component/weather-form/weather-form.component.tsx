@@ -15,6 +15,7 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
     const [countries, setCountries] = useState([]);
     const [city, setCity] = useState({cityName: ""});
     const [country, setCountry] = useState({countryCode: ""});
+    const [suggestions, setSuggestions] = useState([]);
 
     useEffect(() => {
         let mounted = true;
@@ -26,6 +27,10 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
             }
         });
     }, []);
+
+    useEffect(() => {
+
+    })
 
     const handleCountryChange = (event: any) => {
         setCountry({countryCode: event.target.value});
@@ -39,7 +44,7 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
     const changeCityList = (value: string) => {
         if (country.countryCode && value) {
             getCityAutocomplete(country, value).then(r => {
-                console.log(r);
+                setSuggestions(r);
             });
         }
     }
@@ -50,11 +55,27 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
         }
     }
 
+    const onSuggestionHandler = (text: string) => {
+        setCity({cityName: text});
+    }
+
     return (
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md flex bg-white py-8 shadow rounded-lg sm:px-10">
-            <CustomSelect handleChange={handleCountryChange}>{countries}</CustomSelect>
-            <CustomFormField type="text" name="test" id="test" placeholder="Please enter your city"
-                             handleChange={handleCityChange}/>
+        <div className="mt-14 sm:mx-auto sm:w-full sm:max-w-md flex bg-white py-8 shadow rounded-lg sm:px-10">
+            <CustomSelect
+                handleChange={handleCountryChange}
+            >
+                {countries}
+            </CustomSelect>
+            <CustomFormField
+                type="text"
+                name="test"
+                id="test"
+                placeholder="Please enter your city"
+                handleChange={handleCityChange}
+                suggestions={suggestions}
+                onSuggestHandler={onSuggestionHandler}
+                value={city.cityName}
+            />
             <button className="ml-5" onClick={handleClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24"
                      stroke="currentColor" strokeWidth={2}>
