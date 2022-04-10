@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import "./weather-form.styles.scss";
-import CustomSelect from "../custom-select/custom-select.component";
 import {getAllCountries} from "../../services/country.service";
 import CustomFormField from "../form-field/form-field.component";
 import {getCityAutocomplete} from "../../services/city.service";
@@ -52,16 +51,21 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
 
     const onSuggestionHandler = (text: string) => {
         setCity(text);
+        setSuggestions([]);
     }
 
     return (
         <div className="mt-14 sm:mx-auto sm:w-full sm:max-w-md flex bg-white py-8 shadow rounded-lg sm:px-10">
             <img src={cloudy} alt="cloudy" className="w-11 h-9 mr-5"/>
-            <CustomSelect
-                handleChange={handleCountryChange}
+            <select
+                className="w-24 border border-gray-300 px-3 py-2 rounded-lg bg-white shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 appearance-none"
+                onChange={handleCountryChange}
             >
-                {countries}
-            </CustomSelect>
+                <option value="">Select</option>
+                {
+                    countries?.map(country => <option key={country} value={country}>{country}</option>)
+                }
+            </select>
             <CustomFormField
                 type="text"
                 name="test"

@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import "./weather.styles.scss";
 import WeatherForm from "../../component/weather-form/weather-form.component";
 import Forecast from "../../component/forecast/forecast-component";
-import {getWeatherFor7Days} from "../../services/weather.service";
 
 const Weather = () => {
     const [weather, setWeather] = useState(null);
