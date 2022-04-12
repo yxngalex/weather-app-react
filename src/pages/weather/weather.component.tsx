@@ -16,6 +16,7 @@ const Weather = () => {
             });
         });
     }
+
     const getAverageTemperature = (w: any) => {
         let temps = w.daily.slice(1).map((w: any) => w.temp.day);
 

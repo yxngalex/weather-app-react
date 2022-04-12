@@ -30,7 +30,7 @@ const Forecast = ({weather, avg}: forecastProps) => {
     return (
         <React.Fragment>
             <div className="mt-36 text-center font-theme">
-                <div className="text-gray-700 uppercase">This Weeks Average Temperature</div>
+                <div className="text-gray-700 uppercase">This Week's Average Temperature</div>
                 <div className="text-8xl relative">{avg}<span
                     className="text-xl absolute">°C</span></div>
             </div>
