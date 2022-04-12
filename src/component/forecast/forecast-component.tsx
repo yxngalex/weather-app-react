@@ -1,31 +1,12 @@
-import React, {useEffect} from "react";
+import React from "react";
 import "./forecast-styles.scss";
 
 type forecastProps = {
     weather?: any;
+    avg?: number;
 }
 
-const Forecast = ({weather}: forecastProps) => {
-
-    useEffect(() => {
-        getAverageTemperature();
-    }, []);
-
-
-    // const getAverageTemperature = () => {
-    //     for (const w in weather.weatherList) {
-    //         console.log(w);
-    //     }
-    // }
-
-    // const getDay = (w: any) => {
-    //     let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    //     let date = Date.parse(w);
-    //     let d = new Date(date);
-    //     console.log(w);
-    //
-    //     return days[d.getDay()];
-    // }
+const Forecast = ({weather, avg}: forecastProps) => {
 
     const getWeekday = (num: number) => {
         switch (num) {
@@ -46,29 +27,19 @@ const Forecast = ({weather}: forecastProps) => {
         }
     }
 
-    const getAverageTemperature = () => {
-        let temp = 0;
-        let count = 0;
-        for (let i = 0; i < weather; i++) {
-            temp += weather[i].temp.day;
-            count = temp / i;
-        }
-        console.log(count);
-    }
-
     return (
         <React.Fragment>
             <div className="mt-36 text-center font-theme">
-                <div className="text-gray-700">May 03 2022</div>
-                <div className="text-8xl relative">23<span className="text-xl absolute">°C</span></div>
+                <div className="text-gray-700 uppercase">This Weeks Average Temperature</div>
+                <div className="text-8xl relative">{avg}<span
+                    className="text-xl absolute">°C</span></div>
             </div>
-            {/*Average temperature form - to*/}
             <div className="mt-36 flex text-center align-middle justify-center font-theme">
                 {
                     weather.slice(1).map((w: any, index: number) =>
                         <div key={index}>
                             <div className="text-gray-700 mx-6 uppercase text-lg">{getWeekday(index)}</div>
-                            <div className="text-2xl relative">{parseInt(w.temp.day)}<span
+                            <div className="text-2xl relative">{Math.floor(w.temp.day)}<span
                                 className="text-xs absolute">°C</span>
                             </div>
                         </div>
