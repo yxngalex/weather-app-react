@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
-import "./weather.styles.scss";
-import WeatherForm from "../../component/weather-form/weather-form.component";
-import Forecast from "../../component/forecast/forecast-component";
+import WeatherForm from "../../components/weather-form/weather-form.component";
+import Forecast from "../../components/forecast/forecast-component";
 import {getWeather, getWeatherFor7Days} from "../../services/weather.service";
+
+import "./weather.styles.scss";
 
 const Weather = () => {
     const [weather, setWeather] = useState(null);
@@ -10,27 +11,7 @@ const Weather = () => {
     const [bg, setBg] = useState("");
 
     useEffect(() => {
-        if (avgTemperature === 0) {
-            setBg("linear-gradient(90deg, rgba(156,221,253,1))")
-        } else if (avgTemperature > 0 && avgTemperature < 10) {
-            setBg("linear-gradient(90deg, rgba(156, 221, 253, 1) 50%, rgba(255, 214, 108, 1) 100%)")
-        } else if (avgTemperature > 10 && avgTemperature < 20) {
-            setBg("linear-gradient(90deg, rgba(156, 221, 253, 1) 50%, rgba(255, 214, 108, 1) 100%)")
-        } else if (avgTemperature > 20 && avgTemperature < 30) {
-            setBg("linear-gradient(90deg, rgba(255, 214, 108, 1) 50%, rgba(156, 221, 253, 1) 100%)")
-        } else if (avgTemperature > 30) {
-            setBg("linear-gradient(90deg, rgba(156, 221, 253, 1) 100%")
-        } else if (avgTemperature < 0 && avgTemperature > -10) {
-            setBg("linear-gradient(90deg, rgba(23, 156, 231, 1) 50%, rgba(156, 221, 253, 1) 100%)")
-        } else if (avgTemperature < -10 && avgTemperature > -20) {
-            setBg("linear-gradient(90deg, rgba(13, 60, 138, 1) 50%, rgba(23, 156, 231, 1) 100%)")
-        } else if (avgTemperature > 0 && avgTemperature < 40) {
-            setBg("linear-gradient(90deg, rgba(156, 221, 253, 1) 0%, rgba(254, 152, 90, 1) 100%)")
-        } else if (avgTemperature > 0 && avgTemperature < 40) {
-            setBg("linear-gradient(90deg, rgba(156, 221, 253, 1) 0%, rgba(254, 152, 90, 1) 100%)")
-        } else if (avgTemperature < 0 && avgTemperature >= -40) {
-            setBg("linear-gradient(90deg, rgba(13,60,138,1) 0%, rgba(156, 221, 253, 1) 50%)")
-        }
+        getTemperatureClass();
     }, [avgTemperature]);
 
     const addWeather = (country: string, city: string) => {
@@ -51,12 +32,18 @@ const Weather = () => {
         setAvgTemperature(Math.floor(mean));
     }
 
-    const style = {
-        background: bg
+    const getTemperatureClass = () => {
+        if (avgTemperature < 0) {
+            setBg(`wm-${avgTemperature % 10 < 5 ? String(avgTemperature)[0] : String(avgTemperature - 6)[0]}0`);
+        } else if (avgTemperature > 0 && avgTemperature < 10) {
+            setBg(`wp-${avgTemperature % 10 < 5 ? String(avgTemperature)[0] : String(avgTemperature + 6)[0]}0`);
+        } else {
+            setBg("w-0");
+        }
     }
 
     return (
-        <div style={style} className="background">
+        <div className={`bg-forecast ${bg}`}>
             <WeatherForm addWeather={addWeather}/>
             {
                 weather ? (
