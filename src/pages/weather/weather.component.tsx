@@ -35,7 +35,7 @@ const Weather = () => {
     const getTemperatureClass = () => {
         if (avgTemperature < 0) {
             setBg(`wm-${avgTemperature % 10 < 5 ? String(avgTemperature)[0] : String(avgTemperature - 6)[0]}0`);
-        } else if (avgTemperature > 0 && avgTemperature < 10) {
+        } else if (avgTemperature > 0) {
             setBg(`wp-${avgTemperature % 10 < 5 ? String(avgTemperature)[0] : String(avgTemperature + 6)[0]}0`);
         } else {
             setBg("w-0");
