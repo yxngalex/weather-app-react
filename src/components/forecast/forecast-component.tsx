@@ -30,16 +30,16 @@ const Forecast = ({weather, avg}: forecastProps) => {
     return (
         <div className="forecast">
             <div className="mt-36 text-center font-theme">
-                <div className="text-gray-700 uppercase">Average Temperature For The Next 5 Days</div>
+                <div className="text-gray-700 uppercase text-sm">Average Temperature For The Next 5 Days</div>
                 <div className="text-8xl relative text-white">{avg}<span
                     className="text-xl absolute">°C</span></div>
             </div>
             <div className="mt-36 flex text-center align-middle justify-center font-theme weather">
                 {
                     weather.slice(1).map((w: any, index: number) =>
-                        <div key={index}>
-                            <div className="text-gray-700 mx-6 uppercase text-lg">{getWeekday(index)}</div>
-                            <div className="text-2xl relative text-white">{Math.floor(w.temp.day)}<span
+                        <div key={index} className="weather-data">
+                            <div className="text-gray-700 mx-6 uppercase text-sm">{getWeekday(index)}</div>
+                            <div className="text-3xl relative text-white">{Math.floor(w.temp.day)}<span
                                 className="text-xs absolute">°C</span>
                             </div>
                         </div>
