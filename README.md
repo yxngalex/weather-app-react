@@ -10,9 +10,9 @@ This application showcases average temperature for 3 countries.
 * GB (Great Britain)
 * US (United States)
 
-User selects one of these 3 countries, and types in the name of the city in the input field.
+User selects one of these 3 countries and types in the name of the city in the input field.
 
-User has to type in the name of the city for selected country. 
+User has to type in the name of the city for the selected country. 
 
 >EX: US, New York 
 
