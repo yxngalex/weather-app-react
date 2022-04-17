@@ -28,25 +28,25 @@ const Forecast = ({weather, avg}: forecastProps) => {
     }
 
     return (
-        <React.Fragment>
+        <div className="forecast">
             <div className="mt-36 text-center font-theme">
-                <div className="text-gray-700 uppercase">This Week's Average Temperature</div>
-                <div className="text-8xl relative">{avg}<span
+                <div className="text-gray-700 uppercase">Average Temperature For The Next 5 Days</div>
+                <div className="text-8xl relative text-white">{avg}<span
                     className="text-xl absolute">°C</span></div>
             </div>
-            <div className="mt-36 flex text-center align-middle justify-center font-theme">
+            <div className="mt-36 flex text-center align-middle justify-center font-theme weather">
                 {
                     weather.slice(1).map((w: any, index: number) =>
                         <div key={index}>
                             <div className="text-gray-700 mx-6 uppercase text-lg">{getWeekday(index)}</div>
-                            <div className="text-2xl relative">{Math.floor(w.temp.day)}<span
+                            <div className="text-2xl relative text-white">{Math.floor(w.temp.day)}<span
                                 className="text-xs absolute">°C</span>
                             </div>
                         </div>
                     )
                 }
             </div>
-        </React.Fragment>
+        </div>
     )
 }
 

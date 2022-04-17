@@ -1,0 +1,12 @@
+.font-theme {
+  font-family: "Open sans", sans-serif;
+}
+
+@media (max-width: 940px) {
+  .forecast {
+    .weather {
+      display: block;
+      margin: 2rem 3rem;
+    }
+  }
+}

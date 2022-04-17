@@ -55,7 +55,7 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
     }
 
     return (
-        <div className="mt-14 sm:mx-auto sm:w-full sm:max-w-md flex bg-white py-8 shadow rounded-lg sm:px-10">
+        <div className="mt-14 sm:mx-auto sm:w-full sm:max-w-md flex bg-white py-8 shadow rounded-lg sm:px-10 container-form">
             <img src={cloudy} alt="cloudy" className="w-11 h-9 mr-5"/>
             <select
                 className="w-24 border border-gray-300 px-3 py-2 rounded-lg bg-white shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 appearance-none"
@@ -68,8 +68,7 @@ const WeatherForm = ({addWeather}: WeatherFormProps) => {
             </select>
             <CustomFormField
                 type="text"
-                name="test"
-                id="test"
+                id="text-field"
                 placeholder="Please enter your city"
                 handleChange={handleCityChange}
                 suggestions={suggestions}
