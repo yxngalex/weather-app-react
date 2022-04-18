@@ -18,3 +18,10 @@ User has to type in the name of the city for selected country.
 
 Application then showcases average temperature for the next 5 days and daily forecast for the next 7 days.
 
+## Installation
+
+```bas
+git clone git@github.com:yxngalex/weather-app-react.git
+npm install
+npm start 
+```
